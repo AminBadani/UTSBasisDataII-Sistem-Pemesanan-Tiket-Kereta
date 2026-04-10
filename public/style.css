@@ -1,0 +1,64 @@
+:root {
+    --primary-color: rgb(21, 21, 21);
+    --primary-font: Helvetica, Arial, sans-serif;
+    --default-line-height: 1.5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: var(--default-line-height);
+}
+body {
+    font-family: var(--primary-font);
+    color: var(--primary-color);
+    width: 90%;
+    margin: auto;
+}
+
+/* Home */
+.title {
+    margin: 30px 0;
+}
+.container {
+    display: flex;
+    gap: 30px;
+    height: fit-content;
+    flex-wrap: wrap;
+}
+
+/* Home -- Card Ticket */
+#list-ticket {
+    flex: 1;
+}
+.card-ticket {
+    border-bottom: 1px solid var(--primary-color);
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+}
+.card-ticket > :not(.card-footer) {
+    flex: 1;
+}
+
+/* Home -- Sidebar */
+.sidebar {
+    flex: 0.3;
+    position: relative;
+}
+.sticky-sidebar {
+    position: sticky;
+    top: 20px;
+    border: 1px dashed var(--primary-color);
+    padding: 10px;
+}
+.sticky-sidebar button {
+    width: 100%;
+    padding: 5px;
+}
+.sticky-sidebar .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

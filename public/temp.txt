@@ -1,0 +1,18 @@
+<div class="card-ticket">
+    <div class="card-header">
+        <h3>Kereta Purwojaya</h3>
+        <p>Stasiun asal: Purwokerto</p>
+        <p>Tujuan: Gambir (Jakarta Pusat)</p>
+    </div>
+    <div class="card-content">
+        <p>Tipe kereta: Ekonomi</p>
+        <p>Harga tiket: Rp50.000</p>
+        <p>Waktu berangkat: 10 Januari 2027 - 12:30:00 Siang</p>
+        <p>Waktu tiba: 10 Januari 2027 - 14:45:00 Siang</p>
+    </div>
+    <div class="card-footer">
+        <p>Kapasitas: 50</p>
+        <p>Terisi: 20</p>
+        <p>Sisa: 30</p>
+    </div>
+</div>
