@@ -126,6 +126,28 @@ CREATE TABLE `tiket` (
 
 /*Data for the table `tiket` */
 
+/*View for `detail_jadwal` */
+
+DROP VIEW if exists `db_tiket_kereta`.`detail_jadwal`;
+CREATE VIEW `db_tiket_kereta`.`detail_jadwal` AS
+SELECT 
+  j.id_jadwal, j.waktu_berangkat, j.waktu_tiba, j.harga_dasar,
+  j.id_kereta, k.nama_kereta, k.tipe_kereta, k.kapasitas_total,
+  j.id_stasiun_asal AS id_stasiun_asal, s_asal.nama_stasiun AS nama_stasiun_asal, s_asal.kota AS kota_asal,
+  j.id_stasiun_tujuan AS id_stasiun_tujuan, s_tujuan.nama_stasiun AS nama_stasiun_tujuan, s_tujuan.kota AS kota_tujuan
+  FROM jadwal j 
+INNER JOIN 
+  kereta k 
+  ON j.id_kereta = k.id_kereta
+INNER JOIN 
+  stasiun s_asal 
+  ON j.id_stasiun_asal = s_asal.id_stasiun
+INNER JOIN 
+  stasiun s_tujuan 
+  ON j.id_stasiun_tujuan = s_tujuan.id_stasiun
+ORDER BY j.waktu_berangkat ASC;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
