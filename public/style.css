@@ -13,7 +13,7 @@
 body {
     font-family: var(--primary-font);
     color: var(--primary-color);
-    width: 90%;
+    width: 85%;
     margin: auto;
 }
 
@@ -21,7 +21,11 @@ body {
 .title {
     margin: 30px 0;
 }
+nav button {
+    padding: 5px 20px;
+}
 .container {
+    margin-top: 20px;
     display: flex;
     gap: 30px;
     height: fit-content;
@@ -29,17 +33,25 @@ body {
 }
 
 /* Home -- Card Ticket */
-#list-ticket {
+#list-card {
     flex: 1;
 }
-.card-ticket {
+.item-card {
     border-bottom: 1px solid var(--primary-color);
     display: flex;
     gap: 20px;
     padding: 10px;
 }
-.card-ticket > :not(.card-footer) {
+.item-card > :not(.card-footer) {
     flex: 1;
+}
+.item-card .card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.item-card .card-footer button {
+    padding: 2px 10px;
 }
 
 /* Home -- Sidebar */
@@ -61,4 +73,29 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+/* Detail */
+form {
+    flex: 1;
+}
+form label {
+    display: block;
+    margin-top: 10px;
+}
+.information-card {
+    border: 1px dashed var(--primary-color);
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.information-card .card-footer {
+    display: flex;
+    gap: 10px;
+}
+.information-card .card-footer button {
+    flex: 1;
+    padding: 5px 10px;
 }
