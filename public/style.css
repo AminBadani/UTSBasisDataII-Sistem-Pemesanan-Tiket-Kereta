@@ -1,7 +1,12 @@
 :root {
     --primary-color: rgb(21, 21, 21);
+    
     --primary-font: Helvetica, Arial, sans-serif;
+    --secondary-font: 'Courier New', Courier, monospace;
+    
     --default-line-height: 1.5;
+    --default-font-size: 14px;
+    --secondary-font-size: 12px;
 }
 
 * {
@@ -11,10 +16,15 @@
     line-height: var(--default-line-height);
 }
 body {
+    font-size: var(--default-font-size);
     font-family: var(--primary-font);
     color: var(--primary-color);
     width: 85%;
     margin: auto;
+}
+.back-home {
+    display: inline-block;
+    margin-top: 30px;
 }
 
 /* Home */
@@ -57,11 +67,20 @@ nav button {
 /* Home -- Sidebar */
 .sidebar {
     flex: 0.3;
-    position: relative;
+    position: relative;;
 }
 .sticky-sidebar {
     position: sticky;
     top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+.sticky-sidebar .button-group, .sticky-sidebar .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     border: 1px dashed var(--primary-color);
     padding: 10px;
 }
@@ -69,20 +88,11 @@ nav button {
     width: 100%;
     padding: 5px;
 }
-.sticky-sidebar .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.sticky-sidebar input {
+    padding: 3px;
 }
 
 /* Detail */
-form {
-    flex: 1;
-}
-form label {
-    display: block;
-    margin-top: 10px;
-}
 .information-card {
     border: 1px dashed var(--primary-color);
     padding: 20px;
@@ -98,4 +108,43 @@ form label {
 .information-card .card-footer button {
     flex: 1;
     padding: 5px 10px;
+}
+
+/* Form */
+form {
+    width: 35%;
+}
+form label {
+    display: inline-block;
+    margin-top: 15px;
+}
+form input, form select {
+    padding: 5px;
+    width: 100%;
+    font-size: inherit;
+    font-family: var(--secondary-font);
+}
+form button {
+    margin-top: 20px;
+    padding: 5px 10px;
+    font-size: inherit;
+    font-family: var(--secondary-font);
+}
+table {
+    font-size: var(--secondary-font-size);
+    padding: 10px;
+
+    display: block;
+    border: 1px dashed var(--primary-color);
+    max-height: 80vh;
+    overflow: auto;
+}
+table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--primary-color);
+}
+table button {
+    font-size: inherit;
+    font-family: var(--secondary-font);
+    padding: 2px 5px;
 }
