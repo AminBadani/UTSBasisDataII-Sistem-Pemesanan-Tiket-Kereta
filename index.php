@@ -21,10 +21,16 @@
 
         <div class="sidebar">
             <div class="sticky-sidebar">
+                <div class="filter-group">
+                    <div class="search">
+                        <label for="search-input">Cari: </label><input type="text" id="search-input" placeholder="Kereta, kota, dan stasiun">
+                    </div>
+                </div>
                 <div class="button-group">
-                    <button>Tambah tiket</button>
-                    <button>Tambah kereta</button>
-                    <button>Tambah stasiun</button>
+                    <button onclick="location.href = 'action/add-jadwal.php'">Tambah jadwal</button>
+                    <button onclick="location.href = 'action/add-kereta.php'">Tambah kereta</button>
+                    <button onclick="location.href = 'action/add-stasiun.php'">Tambah stasiun</button>
+                    <button onclick="">Tambah penumpang</button>
                 </div>
             </div>
         </div>

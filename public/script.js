@@ -21,6 +21,8 @@ const buttonKereta = document.getElementById("button-kereta");
 const buttonTiket = document.getElementById("button-tiket");
 const buttonStasiun = document.getElementById("button-stasiun");
 
+const searchInput = document.getElementById("search-input");
+
 // -- Helper --
 /**
  * Get all data from table jadwal -> kereta, stasiun asal, dan stasiun akhir
@@ -182,6 +184,25 @@ function renderListStasiun(list, renderElement) {
     }
 }
 
+/**
+ * Filter data by search input 
+ *
+ * @function
+ * @param {(Stasiun[]|Kereta[]|Jadwal[])} list
+ * @param {string} searchText
+ * @returns {(Stasiun[]|Kereta[]|Jadwal[])} filtered list
+ */
+function searchList(list, searchText) {
+    const result = list.filter(item => {
+        const regex = new RegExp(searchText, "gi")
+        return regex.test(item.nama_kereta) 
+            || regex.test(item.nama_stasiun) 
+            || regex.test(item.kota_asal)
+            || regex.test(item.kota_tujuan)
+            || regex.test(item.kota)
+    })
+    return result
+}   
 
 // -- Main | Call --
 window.onload = async () => {
@@ -194,4 +215,8 @@ window.onload = async () => {
     buttonJadwal.addEventListener('click', () => renderListJadwal(allJadwal, listCard)) 
     buttonKereta.addEventListener('click', () => renderListKereta(allKereta, listCard)) 
     buttonStasiun.addEventListener('click', () => renderListStasiun(allStasiun, listCard)) 
+    searchInput.addEventListener('input', (e) => {
+        const searchResult = searchList(allJadwal, e.target.value)
+        renderListJadwal(searchResult, listCard)
+    })
 }
