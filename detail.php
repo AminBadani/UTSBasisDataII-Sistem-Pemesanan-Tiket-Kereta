@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="public/style.css">
 </head>
 <body>
+    <a class="back-home" href="index.php">< Kembali ke halaman utama</a>
     <h1 class="title">Detail Jadwal: <?php echo $detail_jadwal['id_kereta'] ?></h1>
     
     <div class="container">
