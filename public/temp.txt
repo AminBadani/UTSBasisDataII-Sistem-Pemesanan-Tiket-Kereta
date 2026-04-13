@@ -16,3 +16,13 @@
         <p>Sisa: 30</p>
     </div>
 </div>
+
+=================================================================================================================
+
+/*Data for table `ticket` */
+
+insert  into `tiket`(`id_tiket`,`id_penumpang`,`id_jadwal`,`nomor_kursi`,`tgl_pembelian`,`total_bayar`,`status_pembayaran`) values 
+(1,1,1,'A1','2026-04-13 13:49:46',300000.00,'Pending'),
+(2,2,1,'B1','2026-04-13 13:59:53',300000.00,'Pending');
+
+/*Data for table `ticket` */
