@@ -120,8 +120,8 @@ function renderListJadwal(list, renderElement) {
                     <p>Sisa: 30</p>
                 </div>
                 <div class="card-footer">
-                    <button>Edit kereta</button>
-                    <button>Hapus kereta</button>
+                    <button>Edit jadwal</button>
+                    <button>Hapus jadwal</button>
                 </div>
             </div>
         `;

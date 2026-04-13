@@ -6,7 +6,7 @@
         exit();
     } else {
         $current_id_jadwal = htmlspecialchars($_GET['id-jadwal']);
-        $select_detail_jadwal = mysqli_query($connection, "SELECT * FROM detail_jadwal WHERE id_jadwal = $current_id_jadwal LIMIT 1");
+        $select_detail_jadwal = mysqli_query($connection, "SELECT * FROM detail_jadwal WHERE id_jadwal = '$current_id_jadwal' LIMIT 1");
         $detail_jadwal = mysqli_fetch_assoc($select_detail_jadwal);
 
         if (!isset($detail_jadwal)) {
@@ -30,7 +30,7 @@
 </head>
 <body>
     <a class="back-home" href="index.php">< Kembali ke halaman utama</a>
-    <h1 class="title">Detail Jadwal: <?php echo $detail_jadwal['id_kereta'] ?></h1>
+    <h1 class="title">Detail Jadwal: <?php echo $detail_jadwal['id_jadwal'] ?></h1>
     
     <div class="container">
         <div class="information-card">
