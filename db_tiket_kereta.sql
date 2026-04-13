@@ -79,7 +79,7 @@ insert  into `stasiun`(`id_stasiun`,`nama_stasiun`,`kota`) values
 DROP TABLE IF EXISTS `jadwal`;
 
 CREATE TABLE `jadwal` (
-  `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,
+  `id_jadwal` varchar(10) NOT NULL,
   `id_kereta` varchar(10) NOT NULL,
   `id_stasiun_asal` varchar(10) NOT NULL,
   `id_stasiun_tujuan` varchar(10) NOT NULL,
@@ -98,12 +98,12 @@ CREATE TABLE `jadwal` (
 /*Data for the table `jadwal` */
 
 insert into `jadwal`(`id_jadwal`, `id_kereta`, `id_stasiun_asal`, `id_stasiun_tujuan`, `waktu_berangkat`, `waktu_tiba`, `harga_dasar`) values
-(1, 'K-01', 'BPN', 'SMD', '2026-05-13 08:30:00', '2026-05-13 11:00:00', 75000),
-(2, 'K-01', 'SMD', 'BPN', '2026-05-13 12:30:00', '2026-05-13 15:00:00', 75000),
-(3, 'K-02', 'SMD', 'BPN', '2026-05-13 08:30:00', '2026-05-13 11:00:00', 75000),
-(4, 'K-02', 'BPN', 'SMD', '2026-05-13 12:30:00', '2026-05-13 15:00:00', 75000),
-(5, 'K-03', 'BDJ', 'PKY', '2026-05-14 09:00:00', '2026-05-14 12:00:00', 90000),
-(6, 'K-03', 'PKY', 'BDJ', '2026-05-14 13:30:00', '2026-05-14 16:30:00', 90000);
+('A1', 'K-01', 'BPN', 'SMD', '2026-05-13 08:30:00', '2026-05-13 11:00:00', 75000),
+('A2', 'K-01', 'SMD', 'BPN', '2026-05-13 12:30:00', '2026-05-13 15:00:00', 75000),
+('A3', 'K-02', 'SMD', 'BPN', '2026-05-13 08:30:00', '2026-05-13 11:00:00', 75000),
+('A4', 'K-02', 'BPN', 'SMD', '2026-05-13 12:30:00', '2026-05-13 15:00:00', 75000),
+('B1', 'K-03', 'BDJ', 'PKY', '2026-05-14 09:00:00', '2026-05-14 12:00:00', 90000),
+('B2', 'K-03', 'PKY', 'BDJ', '2026-05-14 13:30:00', '2026-05-14 16:30:00', 90000);
 
 /*Table structure for table `tiket` */
 
@@ -147,6 +147,65 @@ INNER JOIN
   ON j.id_stasiun_tujuan = s_tujuan.id_stasiun
 ORDER BY j.waktu_berangkat ASC;
 
+/*View for `detail_jadwal` */
+
+/*Trigger structure for table `tiket` */
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS `cek_kursi_sebelum_insert` $$
+CREATE TRIGGER `cek_kursi_sebelum_insert` 
+BEFORE INSERT 
+ON `tiket` 
+  FOR EACH ROW BEGIN
+    IF EXISTS (
+        SELECT 1 FROM tiket
+        WHERE id_jadwal = NEW.id_jadwal
+        AND nomor_kursi = NEW.nomor_kursi
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Kursi sudah dipesan!';
+    END IF;
+END $$
+
+DROP TRIGGER IF EXISTS `auto_status_pembayaran` $$
+CREATE TRIGGER `auto_status_pembayaran` 
+BEFORE INSERT 
+ON `tiket` 
+  FOR EACH ROW BEGIN
+    IF NEW.total_bayar > 0 THEN
+        SET NEW.status_pembayaran = 'Lunas';
+    END IF;
+END $$
+
+DELIMITER ;
+
+/*Trigger structure for table `tiket` */
+
+/*Procedure structure for procedure `tambah_tiket` */
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `tambah_tiket` $$
+CREATE PROCEDURE `tambah_tiket`(
+    IN p_id_penumpang INT,
+    IN p_id_jadwal INT,
+    IN p_kursi VARCHAR(10)
+)
+BEGIN
+    DECLARE harga DECIMAL(10,2);
+    -- Ambil harga dari jadwal
+    SELECT harga_dasar INTO harga
+    FROM jadwal
+    WHERE id_jadwal = p_id_jadwal;
+    -- Insert tiket
+    INSERT INTO tiket (id_penumpang, id_jadwal, nomor_kursi, tgl_pembelian, total_bayar)
+    VALUES (p_id_penumpang, p_id_jadwal, p_kursi, NOW(), harga);
+END $$
+
+DELIMITER ;
+
+/*Procedure structure for procedure `tambah_tiket` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
